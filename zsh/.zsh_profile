@@ -1,40 +1,24 @@
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 
-PERSONAL=$XDG_CONFIG_HOME/personal
-source $PERSONAL/env
-for i in `find -L $PERSONAL`; do
-    source $i
-done
-source $(brew --prefix)/opt/fzf/share/fzf/key-bindings.zsh
-source $(brew --prefix)/opt/fzf/share/fzf/completion.zsh
-
 export NRDP="$HOME/work/nrdp"
 export NRDP_BUILDS="$HOME/work/builds"
-export CC="clang"
-export CXX="clang++"
-export PYTHONBREAKPOINT="pudb.set_trace"
-export GOPATH=$HOME/go
 export DARWINS_DIR="$HOME/work/darwins"
 export TVUI="$HOME/work/tvui"
 export API_TOOLS=$HOME/work/tools/edge/scripts
 export GIT_EDITOR=$VIM
 export EOSIO_INSTALL_DIR=$HOME/personal/eos
 export NF_IDFILE=$HOME/.idfile
-export DENO_INSTALL="$HOME/.deno"
-export N_PREFIX="$HOME/.local/n"
 export DOTFILES=$HOME/.dotfiles
-export BOGART=$HOME/work/bogart
 
-addToPathFront $HOME/.zig
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
 addToPathFront $HOME/.local/.npm-global/bin
 addToPathFront $HOME/.local/scripts
-addToPathFront $HOME/.local/bin
-addToPathFront $HOME/.local/n/bin/
-addToPathFront $HOME/.local/go/bin
-addToPathFront $HOME/go/bin
-addToPathFront $HOME/personal/sumneko/bin
-addToPathFront $HOME/.deno/bin
 
 # Where should I put you?
 bindkey -s ^f "tmux-sessionizer\n"
